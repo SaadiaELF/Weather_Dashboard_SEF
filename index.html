@@ -14,6 +14,20 @@
 <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
+
+        var APIKey = "050af8688da478cbcad8a4d3f154271f";
+        var city = "rabat";
+
+        var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey;
+
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function (response) {
+            console.log(queryURL);
+            console.log(response);
+        });
+
     </script>
 </body>
 
