@@ -75,14 +75,24 @@
         $(document).ready(function () {
             $("#searchBtn").on("click", function (event) {
                 event.preventDefault();
-                
+                $("#SearchHistory").empty();
                 $("#weatherCard").attr("style", "block")
                 var newCity = $("#searchInput").val().trim().toLowerCase();
                 localStorage.setItem("City", newCity);
-                var searchHistory = [];
-                searchHistory.push();
-                localStorage.setItem("History", JSON.stringify(searchHistory));
+                var searchHistory = JSON.parse(localStorage.getItem("History")) || []
+                searchHistory.push(newCity);
 
+                localStorage.setItem("History", JSON.stringify(searchHistory));
+                searchHistory = JSON.parse(localStorage.getItem("History"));
+                $.each(searchHistory, function (i, element) {
+
+                    var newElt = $("<button>");
+                    newElt.text(element);
+                    newElt.addClass("list-group-item")
+                    $("#SearchHistory").append(newElt);
+                   
+                });
+               
                 var currentDate = moment().format('L');
                 var APIKey = "050af8688da478cbcad8a4d3f154271f";
                 var city = localStorage.getItem("City");
@@ -107,12 +117,6 @@
                     var wind = response.list[0].wind.speed;
                     console.log(wind);
 
-                    var cityName = response.city.name;
-                    var newElt = $("<button>");
-                    newElt.text(cityName);
-                    newElt.addClass("list-group-item")
-                    $("#SearchHistory").append(newElt);
-
                     var lat = response.city.coord.lat;
                     var lon = response.city.coord.lon;
                     var queryURL2 = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=hourly,daily" + "&appid=" + APIKey;
@@ -135,6 +139,8 @@
                 });
 
             });
+
+
 
 
         });
