@@ -14,9 +14,8 @@
 
 <body>
     <div class="container-fluid">
-        <header class="row-fluid">
-            <nav class="navbar navbar-light border-bottom border-3 rounded-bottom"
-                style="background-color: #d7eaf8;">
+        <header class="row-fluid" style="margin-bottom:10px">
+            <nav class="navbar navbar-light border-bottom border-3 rounded-bottom" style="background-color: #d7eaf8;">
                 <div class="container-fluid">
                     <a class="navbar-brand">
                         <img src="Assets/icon.png" alt="" width="30" height="24" class="d-inline-block align-top">
@@ -29,7 +28,7 @@
                 </div>
             </nav>
         </header>
-        <main  class="row">
+        <main class="row" style="padding:0;">
             <div class="col-md-4">
                 <div class="card float-start" style="width:100%">
                     <div class="card-header">
@@ -40,20 +39,28 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-8" style="padding-left:0;">
                 <div class="card float-end" style="width:100%">
                     <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <div class="card-text">
-
-                      </div>
-                      
+                        <h5 class="card-title">Card title</h5>
+                        <div class="card-text">
+                        </div>
                     </div>
-                  </div>
+                </div>
             </div>
-      
-        </main>
 
+        </main>
+        <section class="col-md-8 float-end" style="margin-top:10px">
+            <h5>5-Days Forcast</h5>
+            <div class="row row-cols-5">
+
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"></div>
+            </div>
+        </section>
         <footer class="row fixed-bottom bg-light border-top border-3 rounded-top" style="background-color: #d7eaf8;">
 
             <h6 class="text-center text-muted align-text-top"> SEF © Copyright </h6>
