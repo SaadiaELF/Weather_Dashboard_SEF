@@ -32,16 +32,16 @@
 
         <main class="row" style="padding:0;">
             <div class="col-md-4">
-                <div id="weatherCard" class="card float-start" style="width:100%">
+                <div class="card float-start" style="width:100%;">
                     <div class="card-header">
                         Search history
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item"></li>
+                    <ul id="SearchHistory" class="list-group list-group-flush">
+                        <!-- <button class="list-group-item"></button> -->
                     </ul>
                 </div>
             </div>
-            <div class="col-md-8" style="padding-left:0;">
+            <div id="weatherCard" class="col-md-8" style="padding-left:0; display: none;">
                 <div class="card float-end" style="width:100%">
                     <div class="card-body">
                         <h2 id="cityName" class="card-title"></h2>
@@ -72,59 +72,72 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
     <script type="text/javascript">
 
+        $(document).ready(function () {
+            $("#searchBtn").on("click", function (event) {
+                event.preventDefault();
+                
+                $("#weatherCard").attr("style", "block")
+                var newCity = $("#searchInput").val().trim().toLowerCase();
+                localStorage.setItem("City", newCity);
+                var searchHistory = [];
+                searchHistory.push();
+                localStorage.setItem("History", JSON.stringify(searchHistory));
 
-        $("#searchBtn").on("click", function (event) {
-            event.preventDefault();
-            var newCity = $("#searchInput").val().trim().toLowerCase();
-            localStorage.setItem("City", newCity);
-            var currentDate = moment().format('L');
+                var currentDate = moment().format('L');
+                var APIKey = "050af8688da478cbcad8a4d3f154271f";
+                var city = localStorage.getItem("City");
+                var queryURL1 = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey;
 
-            var APIKey = "050af8688da478cbcad8a4d3f154271f";
-            var city = localStorage.getItem("City");
-            var queryURL1 = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey;
-
-            $.ajax({
-                url: queryURL1,
-                method: "GET"
-            }).then(function (response) {
-                console.log(response)
-
-                $("#cityName").text(response.city.name + "  (" + currentDate + ")");
-
-                var K = response.list[0].main.temp;
-                console.log(K);
-                var F = (K - 273.15) * 1.80 + 32;
-                console.log(F.toFixed(2));
-
-                var humidity = response.list[0].main.humidity;
-                console.log(humidity);
-
-                var wind = response.list[0].wind.speed;
-                console.log(wind);
-
-                var lat = response.city.coord.lat;
-                var lon = response.city.coord.lon;
-                var queryURL2 = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=hourly,daily" + "&appid=" + APIKey;
                 $.ajax({
-                    url: queryURL2,
+                    url: queryURL1,
                     method: "GET"
                 }).then(function (response) {
                     console.log(response)
-                    var UVI = response.current.uvi;
-                    console.log(UVI);
-                    var forcast = $("#cityForcast").html(
-                    "Temperature : " + F.toFixed(2) + " °F" + "<br>" +
-                    "Humidity : " + humidity + " %" + "<br>" +
-                    "Wind speed : " + wind + " MPH" + "<br>" +
-                    "UV index : " + UVI 
-                );
+
+                    $("#cityName").text(response.city.name + "  (" + currentDate + ")");
+
+                    var K = response.list[0].main.temp;
+                    console.log(K);
+                    var F = (K - 273.15) * 1.80 + 32;
+                    console.log(F.toFixed(2));
+
+                    var humidity = response.list[0].main.humidity;
+                    console.log(humidity);
+
+                    var wind = response.list[0].wind.speed;
+                    console.log(wind);
+
+                    var cityName = response.city.name;
+                    var newElt = $("<button>");
+                    newElt.text(cityName);
+                    newElt.addClass("list-group-item")
+                    $("#SearchHistory").append(newElt);
+
+                    var lat = response.city.coord.lat;
+                    var lon = response.city.coord.lon;
+                    var queryURL2 = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=hourly,daily" + "&appid=" + APIKey;
+                    $.ajax({
+                        url: queryURL2,
+                        method: "GET"
+                    }).then(function (response) {
+                        console.log(response)
+                        var UVI = response.current.uvi;
+                        console.log(UVI);
+                        var forcast = $("#cityForcast").html(
+                            "Temperature : " + F.toFixed(2) + " °F" + "<br>" +
+                            "Humidity : " + humidity + " %" + "<br>" +
+                            "Wind speed : " + wind + " MPH" + "<br>" +
+                            "UV index : " + UVI
+                        );
+                    });
+
+
                 });
-               
 
             });
 
-        });
 
+        });
     </script>
 
 </body>
