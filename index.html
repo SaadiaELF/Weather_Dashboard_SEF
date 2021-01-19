@@ -14,10 +14,9 @@
 
 <body>
     <div class="container-fluid">
-
         <header class="row-fluid">
-
-            <nav class="navbar fixed-top navbar-light" style="background-color: #d7eaf8;">
+            <nav class="navbar navbar-light border-bottom border-3 rounded-bottom"
+                style="background-color: #d7eaf8;">
                 <div class="container-fluid">
                     <a class="navbar-brand">
                         <img src="Assets/icon.png" alt="" width="30" height="24" class="d-inline-block align-top">
@@ -29,25 +28,55 @@
                     </form>
                 </div>
             </nav>
-
         </header>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script type="text/javascript">
+        <main  class="row">
+            <div class="col-md-4">
+                <div class="card float-start" style="width:100%">
+                    <div class="card-header">
+                        Search history
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card float-end" style="width:100%">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <div class="card-text">
 
-            var APIKey = "050af8688da478cbcad8a4d3f154271f";
-            var city = "rabat";
+                      </div>
+                      
+                    </div>
+                  </div>
+            </div>
+      
+        </main>
 
-            var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey;
+        <footer class="row fixed-bottom bg-light border-top border-3 rounded-top" style="background-color: #d7eaf8;">
 
-            $.ajax({
-                url: queryURL,
-                method: "GET"
-            }).then(function (response) {
-                console.log(queryURL);
-                console.log(response);
-            });
+            <h6 class="text-center text-muted align-text-top"> SEF © Copyright </h6>
 
-        </script>
+        </footer>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        var APIKey = "050af8688da478cbcad8a4d3f154271f";
+        var city = "rabat";
+
+        var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey;
+
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function (response) {
+            console.log(queryURL);
+            console.log(response);
+        });
+
+    </script>
 </body>
 
 </html>
