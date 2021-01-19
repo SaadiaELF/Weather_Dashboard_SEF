@@ -22,12 +22,13 @@
                         Weather Dashboard
                     </a>
                     <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-primary" type="submit">Search</button>
+                        <input id="searchInput" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button id="searchBtn" class="btn btn-outline-primary" type="submit">Search</button>
                     </form>
                 </div>
             </nav>
         </header>
+
         <main class="row" style="padding:0;">
             <div class="col-md-4">
                 <div class="card float-start" style="width:100%">
@@ -42,30 +43,29 @@
             <div class="col-md-8" style="padding-left:0;">
                 <div class="card float-end" style="width:100%">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <div class="card-text">
+                        <h5 id="cityName" class="card-title"></h5>
+                        <div id="cityForcast" class="card-text">
                         </div>
                     </div>
                 </div>
             </div>
-
         </main>
-        <section class="col-md-8 float-end" style="margin-top:10px">
+
+        <section class="col-md-8 float-end" style="margin-top:10px;">
             <h5>5-Days Forcast</h5>
             <div class="row row-cols-5">
-
-                <div class="col"></div>
-                <div class="col"></div>
-                <div class="col"></div>
-                <div class="col"></div>
-                <div class="col"></div>
+                <div id="day01" class="col"></div>
+                <div id="day02" class="col"></div>
+                <div id="day03" class="col"></div>
+                <div id="day04" class="col"></div>
+                <div id="day05" class="col"></div>
             </div>
         </section>
+
         <footer class="row fixed-bottom bg-light border-top border-3 rounded-top" style="background-color: #d7eaf8;">
-
             <h6 class="text-center text-muted align-text-top"> SEF © Copyright </h6>
-
         </footer>
+        
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
