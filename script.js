@@ -37,13 +37,32 @@ function APIfunction() {
         url: queryURL1,
         method: "GET"
     }).then(function (response) {
-
+        console.log(queryURL1);
+        console.log(response);
+        console.log(response.list[0].weather[0].icon);
         $("#cityName").text(response.city.name + "  (" + currentDate + ")");
 
         var K = response.list[0].main.temp;
         var F = (K - 273.15) * 1.80 + 32;
         var humidity = response.list[0].main.humidity;
         var wind = response.list[0].wind.speed;
+
+        for (var i = 1; i < 6; i++) {
+            var dayK = response.list[i].main.temp;
+            var dayF = (dayK - 273.15) * 1.80 + 32;
+            var dayHumidity = response.list[i].main.humidity;
+            var dayicon = response.list[i].weather[0].icon;
+            var date = moment().add(i, 'days').format('L');
+            
+            $("#day0" + i).html(
+                date + "<br>" +
+                "<img src=http://openweathermap.org/img/wn/" + dayicon + "@2x.png>" + "<br>" +
+                "Temp : " + dayF.toFixed(2) + " °F" + "<br>" +
+                "Humidity : " + dayHumidity + " %"
+            );
+
+
+        };
 
 
         var lat = response.city.coord.lat;
