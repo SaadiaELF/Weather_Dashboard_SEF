@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@600&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body  style="background-color: #f0f1f1">
     <div class="container-fluid">
         <header class="row-fluid" style="margin-bottom:10px">
             <nav class="navbar navbar-light border-bottom border-3 rounded-bottom" style="background-color: #d7eaf8;">
@@ -30,8 +30,8 @@
             </nav>
         </header>
 
-        <main class="row p:0">
-            <div class="col-md-4">
+        <main class="row p-0 m-1">
+            <aside class="col-md-4">
                 <div id="searchCard" class="card float-start" style="display: none;">
                     <div class="card-header">
                         Search history
@@ -40,32 +40,38 @@
                         <!-- <button class="list-group-item"></button> -->
                     </ul>
                 </div>
-            </div>
-            <div id="weatherCard" class="col-md-8" style="display: none;">
-                <div class="card float-end" style="width:100%">
+            </aside>
+            <section class="col-md-8">
+                <div id="weatherCard" class="row card me-1" style="width:100%; display: none;">
                     <div class="card-body">
                         <h2 id="cityName" class="card-title"></h2>
                         <div id="cityForcast" class="card-text">
                         </div>
                     </div>
                 </div>
-            </div>
-        </main>
-        
-        <section id="forcastSection" class="col-md-8 float-end" style="display: none;">
-            <h5 class="ms-2">5-Days Forcast</h5>
-            <div class="row align-items-center">
-                <div id="day01" class="col-2 bg-primary m-1 ms-4"></div>
-                <div id="day02" class="col-2 bg-primary m-1"></div>
-                <div id="day03" class="col-2 bg-primary m-1"></div>
-                <div id="day04" class="col-2 bg-primary m-1"></div>
-                <div id="day05" class="col-2 bg-primary m-1"></div>
-            </div>     
-        </section>
+                <div id="forcastSection" class="row ms-1" style="width:100%; display: none;">
+                    <h5>5-Days Forcast</h5>
+                    <div class="row align-items-center">
+                        <div id="day01" class="col-md-2 bg-primary m-1"></div>
+                        <div id="day02" class="col-md-2 bg-primary m-1"></div>
+                        <div id="day03" class="col-md-2 bg-primary m-1"></div>
+                        <div id="day04" class="col-md-2 bg-primary m-1"></div>
+                        <div id="day05" class="col-md-2 bg-primary m-1"></div>
+                    </div>
+                </div>
+            </section>
 
-        <footer class="row fixed-bottom bg-light border-top border-3 rounded-top" style="background-color: #d7eaf8;">
-            <h6 class="text-center text-muted align-text-top"> SEF © Copyright </h6>
-        </footer>
+
+
+
+
+    </div>
+    </main>
+
+
+    <footer class="row fixed-bottom bg-light border-top border-3 rounded-top" style="background-color: #d7eaf8;">
+        <h6 class="text-center text-muted align-text-top"> SEF © Copyright </h6>
+    </footer>
 
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
