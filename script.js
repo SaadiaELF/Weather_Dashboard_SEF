@@ -70,11 +70,12 @@ function APIfunction() {
             } else if ((UVI > 7)) {
                 $("#UVI").addClass("bg-danger");
             };
-         
-            $("#UVI").attr("data-bs-toggle","tooltip");
-            $("#UVI").attr( "title", "UV Index scale : UVI<2 favorable ; 2<UVI<7 moderate; UVI>7 severe");
-            $("#UVI").attr( "data-bs-placement", "right");
-            });
+
+            $("#UVI").attr("data-bs-toggle", "tooltip");
+            $("#UVI").attr("title", "UV Index scale : UVI<2 favorable ; 2<UVI<7 moderate; UVI>7 severe");
+            $("#UVI").attr("data-bs-placement", "right");
+
+        });
 
     });
 
