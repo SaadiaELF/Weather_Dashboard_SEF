@@ -20,8 +20,9 @@ function displaySearchHistory() {
 
     var searchHistory = JSON.parse(localStorage.getItem("History")) || []
     searchHistory.push(newCity);
+    uniqSearchHistory  = [...new Set(searchHistory)];
 
-    localStorage.setItem("History", JSON.stringify(searchHistory));
+    localStorage.setItem("History", JSON.stringify(uniqSearchHistory));
 
     createButtons();
 };
