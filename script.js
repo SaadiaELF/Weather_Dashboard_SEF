@@ -12,22 +12,6 @@ function createButtons() {
     });
 };
 
-
-$(document).on("click", ".button", function (event) {
-    event.preventDefault();
-
-    displaySearchHistory();
-
-    $("#weatherCard").attr("style", "display:block ; padding-left:0");
-    $("#searchCard").attr("style", "display:block ; width:100%");
-    $("#forcastSection").attr("style", "display:block ; margin-top:10px");
-
-    localStorage.setItem("City",  $(this).text());
-
-    APIfunction();
-   
-});
-
 function displaySearchHistory() {
 
     $("#SearchHistory").empty();
@@ -35,13 +19,37 @@ function displaySearchHistory() {
     var newCity = $("#searchInput").val().trim().toLowerCase();
     localStorage.setItem("City", newCity);
 
-    var searchHistory = JSON.parse(localStorage.getItem("History")) || []
+    var searchHistory = JSON.parse(localStorage.getItem("History")) || [];
     searchHistory.push(newCity);
     uniqSearchHistory = [...new Set(searchHistory)];
 
     localStorage.setItem("History", JSON.stringify(uniqSearchHistory));
 
     createButtons();
+};
+
+function displayContent() {
+
+    $("#weatherCard").css("display", "block");
+    $("#searchCard").css({ "display": "block", "width": "100%" });
+    $("#forcastSection").css("display", "block");
+
+};
+
+function UVIScale(UVI) {
+    if (UVI <= 2) {
+        $("#UVI").addClass("bg-success");
+    } else if ((UVI > 2 && UVI >= 7)) {
+        $("#UVI").addClass("bg-warning");
+    } else if ((UVI > 7)) {
+        $("#UVI").addClass("bg-danger");
+    };
+};
+
+function addTooltip() {
+    $("#UVI").attr("data-bs-toggle", "tooltip");
+    $("#UVI").attr("title", "UV Index scale : UVI<2 favorable ; 2<UVI<7 moderate; UVI>7 severe");
+    $("#UVI").attr("data-bs-placement", "right");
 };
 
 
@@ -65,16 +73,16 @@ function APIfunction() {
         var icon = response.list[0].weather[0].icon;
         var todayIcon = "<img src=http://openweathermap.org/img/wn/" + icon + "@2x.png>"
 
+        $("#cityName").html(response.city.name + "  (" + currentDate + ") " + todayIcon);
+
         for (var i = 1; i < 6; i++) {
             var dayK = response.list[i].main.temp;
             var dayF = (dayK - 273.15) * 1.80 + 32;
             var dayHumidity = response.list[i].main.humidity;
             var dayIcon = response.list[i].weather[0].icon;
             var dayIconLink = "<img src=http://openweathermap.org/img/wn/" + dayIcon + "@2x.png>";
-
             var date = moment().add(i, 'days').format('L');
 
-            $("#cityName").html(response.city.name + "  (" + currentDate + ") " + todayIcon);
 
             $("#day0" + i).html(
                 date + "<br>" +
@@ -83,9 +91,7 @@ function APIfunction() {
                 "Humidity : " + dayHumidity + " %"
             );
 
-
         };
-
 
         var lat = response.city.coord.lat;
         var lon = response.city.coord.lon;
@@ -104,24 +110,26 @@ function APIfunction() {
                 "UV index : " + "<span id='UVI'>" + UVI.toFixed(2) + "</span>"
             );
 
-            if (UVI <= 2) {
-                $("#UVI").addClass("bg-success");
-            } else if ((UVI > 2 && UVI >= 7)) {
-                $("#UVI").addClass("bg-warning");
-            } else if ((UVI > 7)) {
-                $("#UVI").addClass("bg-danger");
-            };
-
-            $("#UVI").attr("data-bs-toggle", "tooltip");
-            $("#UVI").attr("title", "UV Index scale : UVI<2 favorable ; 2<UVI<7 moderate; UVI>7 severe");
-            $("#UVI").attr("data-bs-placement", "right");
-
+            UVIScale(UVI)
+            addTooltip();
+            displayContent();
 
         });
 
     });
 
 };
+
+$(document).on("click", ".button", function (event) {
+    event.preventDefault();
+
+    displaySearchHistory();
+
+    localStorage.setItem("City", $(this).text());
+
+    APIfunction();
+
+});
 
 $(document).ready(function () {
 
@@ -130,29 +138,20 @@ $(document).ready(function () {
 
         displaySearchHistory();
 
-        $("#weatherCard").attr("style", "display:block ; padding-left:0");
-        $("#searchCard").attr("style", "display:block ; width:100%");
-        $("#forcastSection").attr("style", "display:block ; margin-top:10px");
-      
         APIfunction();
-       
+
     });
 
 });
 
-$(window).on('load', function() {
-    
-        $("#weatherCard").attr("style", "display:block ; padding-left:0");
-        $("#searchCard").attr("style", "display:block ; width:100%");
-        $("#forcastSection").attr("style", "display:block ; margin-top:10px");
-        
-        searchH = JSON.parse(localStorage.getItem("History"));
-        console.log(searchH)
-        displaySearchHistory();
-        var lastCity = searchH[searchH.length - 2]
-        console.log(lastCity)
-        localStorage.setItem("City", lastCity);
-       
-        APIfunction();
-    
+$(window).on('load', function () {
+
+    displaySearchHistory();
+    var index = searchHistory.length
+    while (index-- && !searchHistory[index]);
+    var lastCity = searchHistory[index];
+    localStorage.setItem("City", lastCity);
+
+    APIfunction();
+
 });
