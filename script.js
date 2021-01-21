@@ -15,7 +15,7 @@ function createButtons() {
 
 $(document).on("click", ".button", function (event) {
     event.preventDefault();
-    
+
     displaySearchHistory();
 
     $("#weatherCard").attr("style", "display:block ; padding-left:0");
@@ -27,7 +27,6 @@ $(document).on("click", ".button", function (event) {
     APIfunction();
    
 });
-
 
 function displaySearchHistory() {
 
@@ -139,4 +138,21 @@ $(document).ready(function () {
        
     });
 
+});
+
+$(window).on('load', function() {
+    
+        $("#weatherCard").attr("style", "display:block ; padding-left:0");
+        $("#searchCard").attr("style", "display:block ; width:100%");
+        $("#forcastSection").attr("style", "display:block ; margin-top:10px");
+        
+        searchH = JSON.parse(localStorage.getItem("History"));
+        console.log(searchH)
+        displaySearchHistory();
+        var lastCity = searchH[searchH.length - 2]
+        console.log(lastCity)
+        localStorage.setItem("City", lastCity);
+       
+        APIfunction();
+    
 });
