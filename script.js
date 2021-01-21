@@ -6,10 +6,28 @@ function createButtons() {
     $.each(searchHistory, function (i, element) {
         var newElt = $("<button>");
         newElt.text(element);
-        newElt.addClass("list-group-item")
+        newElt.addClass("button list-group-item");
+        newElt.attr("data-index", i);
         $("#SearchHistory").append(newElt);
     });
 };
+
+
+$(document).on("click", ".button", function (event) {
+    event.preventDefault();
+    
+    displaySearchHistory();
+
+    $("#weatherCard").attr("style", "display:block ; padding-left:0");
+    $("#searchCard").attr("style", "display:block ; width:100%");
+    $("#forcastSection").attr("style", "display:block ; margin-top:10px");
+
+    localStorage.setItem("City",  $(this).text());
+
+    APIfunction();
+   
+});
+
 
 function displaySearchHistory() {
 
@@ -20,12 +38,13 @@ function displaySearchHistory() {
 
     var searchHistory = JSON.parse(localStorage.getItem("History")) || []
     searchHistory.push(newCity);
-    uniqSearchHistory  = [...new Set(searchHistory)];
+    uniqSearchHistory = [...new Set(searchHistory)];
 
     localStorage.setItem("History", JSON.stringify(uniqSearchHistory));
 
     createButtons();
 };
+
 
 function APIfunction() {
 
@@ -33,6 +52,7 @@ function APIfunction() {
     var APIKey = "050af8688da478cbcad8a4d3f154271f";
     var city = localStorage.getItem("City");
     var queryURL1 = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey;
+
 
     $.ajax({
         url: queryURL1,
@@ -97,6 +117,7 @@ function APIfunction() {
             $("#UVI").attr("title", "UV Index scale : UVI<2 favorable ; 2<UVI<7 moderate; UVI>7 severe");
             $("#UVI").attr("data-bs-placement", "right");
 
+
         });
 
     });
@@ -104,6 +125,7 @@ function APIfunction() {
 };
 
 $(document).ready(function () {
+
     $("#searchBtn").on("click", function (event) {
         event.preventDefault();
 
@@ -112,8 +134,9 @@ $(document).ready(function () {
         $("#weatherCard").attr("style", "display:block ; padding-left:0");
         $("#searchCard").attr("style", "display:block ; width:100%");
         $("#forcastSection").attr("style", "display:block ; margin-top:10px");
-
+      
         APIfunction();
+       
     });
 
 });
