@@ -5,22 +5,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
+    <!-- Adding an icon to the title -->
     <link rel="icon" type="image/png" href="Assets/icon.png">
+    <!-- Linking file to Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <!-- Linking file to CSS file -->
     <link rel="stylesheet" href="./style.css">
+    <!--Linking file to Google fonts-->
     <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@600&display=swap" rel="stylesheet">
 </head>
 
 <body style="background-color: #f0f1f1">
     <div class="container-fluid">
-        <header class="row-fluid" style="margin-bottom:10px">
+        <!-- Adding the header -->
+        <header class="row-fluid mb-1">
+            <!-- Adding Navigation bar -->
             <nav class="navbar navbar-light border-bottom border-3 rounded-bottom" style="background-color: #d7eaf8;">
                 <div class="container-fluid">
+                    <!-- Adding Navigation bar title -->
                     <a class="navbar-brand">
                         <img src="Assets/icon.png" alt="" width="30" height="24" class="d-inline-block align-top">
                         Weather Dashboard
                     </a>
+                    <!-- Adding the input search field with button -->
                     <form class="d-flex">
                         <input id="searchInput" class="form-control me-2" type="search" placeholder="Search for a City"
                             aria-label="Search">
@@ -31,17 +39,20 @@
         </header>
 
         <main class="row p-0 m-1">
+            <!-- Adding the search history section -->
             <aside class="col-md-4">
                 <div id="searchCard" class="card float-start" style="display: none;">
                     <div class="card-header">
                         Search history
                     </div>
                     <ul id="SearchHistory" class="list-group list-group-flush">
-                        
+
                     </ul>
                 </div>
             </aside>
+
             <section class="col-md-8">
+                <!-- Adding the current weather condition section -->
                 <div id="weatherCard" class="row card me-1" style="display: none;">
                     <div class="card-body">
                         <h2 id="cityName" class="card-title"></h2>
@@ -49,6 +60,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- Adding the future weather conditions section -->
                 <div id="forcastSection" class="row ms-1 mt-2 me-1" style="display: none;">
                     <h5>5-Days Forcast</h5>
                     <div class="row align-items-center">
@@ -63,14 +75,17 @@
     </div>
     </main>
 
-
+    <!-- Adding the footer-->
     <footer class="row fixed-bottom bg-light border-top border-3 rounded-top" style="background-color: #d7eaf8;">
         <h6 class="text-center text-muted align-text-top"> SEF © Copyright </h6>
     </footer>
 
     </div>
+    <!--Linking file to moment.js-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <!--Linking file to JQuery-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
+    <!--Linking file to the script file-->
     <script type="text/javascript" src="./script.js"></script>
 
     </script>
