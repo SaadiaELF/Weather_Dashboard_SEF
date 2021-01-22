@@ -159,8 +159,8 @@ $(document).on("click", ".button", function (event) {
 
 
 $(document).ready(function () {
-    //Adding a click event to the search button to display 
-    //the current and future conditions for the searched city
+//Adding a click event to the search button to display 
+//the current and future conditions for the searched city
     $("#searchBtn").on("click", function (event) {
         event.preventDefault();
 
