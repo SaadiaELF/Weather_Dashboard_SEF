@@ -153,14 +153,13 @@ function forecastAPIfunction() {
 
 //Adding a click event to the search history buttons 
 //to display the current and future conditions again
-$(document).on("click", ".button", function (event) {
-    event.preventDefault();
+$(document).on("click", ".button", function () {
 
     displaySearchHistory();
 
     localStorage.setItem("City", $(this).text());
 
-    forecast;
+    forecastAPIfunction();
 
 });
 
@@ -173,7 +172,7 @@ $(document).ready(function () {
 
         displaySearchHistory();
 
-        forecast;
+        forecastAPIfunction();
 
     });
 
@@ -184,6 +183,6 @@ $(window).on('load', function () {
     $("#searchInput").val(localStorage.getItem("City")) ;
     displaySearchHistory();
  
-    forecast;
+    forecastAPIfunction();
 
 });
