@@ -70,7 +70,7 @@ function displayForcast(response) {
         var dayF = (dayK - 273.15) * 1.80 + 32;
         var dayHumidity = response.list[i].main.humidity;
         var dayIcon = response.list[i].weather[0].icon;
-        var dayIconLink = "<img src=http://openweathermap.org/img/wn/" + dayIcon + "@2x.png>";
+        var dayIconLink = "<img src=https://openweathermap.org/img/wn/" + dayIcon + "@2x.png>";
         //Calling the future days date via moment function
         var date = moment().add(i, 'days').format('L');
 
@@ -121,7 +121,7 @@ function forecastAPIfunction() {
     // Building the URL to query the first database
     var APIKey = "050af8688da478cbcad8a4d3f154271f";
     var city = localStorage.getItem("City");
-    var queryURL1 = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey;
+    var queryURL1 = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey;
 
     // creating the AJAX call for the first API
     $.ajax({
@@ -137,7 +137,7 @@ function forecastAPIfunction() {
         var humidity = response.list[0].main.humidity;
         var wind = response.list[0].wind.speed;
         var icon = response.list[0].weather[0].icon;
-        var todayIcon = "<img src=http://openweathermap.org/img/wn/" + icon + "@2x.png>"
+        var todayIcon = "<img src=https://openweathermap.org/img/wn/" + icon + "@2x.png>"
 
         //printing the city's name and the current date in the screen 
         $("#cityName").html(response.city.name + "  (" + currentDate + ") " + todayIcon);
