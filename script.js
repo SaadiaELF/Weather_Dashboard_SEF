@@ -5,9 +5,10 @@ function createButtons() {
     // it's converted back to an array
     searchHistory = JSON.parse(localStorage.getItem("History"));
 
+    // for each element of the serchHistory arry we create a button
     $.each(searchHistory, function (i, element) {
         var newElt = $("<button>");
-        newElt.text(element);
+        newElt.text(element.charAt(0).toUpperCase() + element.slice(1));
         newElt.addClass("button list-group-item");
         $("#SearchHistory").append(newElt);
     });
@@ -20,12 +21,12 @@ function displaySearchHistory() {
 
     // creating a localStorage to hold the city's name
     var newCity = $("#searchInput").val().trim().toLowerCase();
-    if (newCity)  localStorage.setItem("City", newCity);
+    if (newCity) localStorage.setItem("City", newCity);
 
     // pushing the city's name into an array 
     var searchHistory = JSON.parse(localStorage.getItem("History")) || [];
-    if (newCity)  searchHistory.push(newCity);
-    
+    if (newCity) searchHistory.push(newCity);
+
     //Creating this array to hold the searchHistory array withou repeated elements
     uniqSearchHistory = [...new Set(searchHistory)];
 
@@ -85,7 +86,7 @@ function displayForcast(response) {
 };
 
 // This function hold the one call API request and its response
-function oneCallAPIfunction(response,F,wind,humidity,APIKey) {
+function oneCallAPIfunction(response, F, wind, humidity, APIKey) {
     var lat = response.city.coord.lat;
     var lon = response.city.coord.lon;
     var queryURL2 = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=hourly,daily" + "&appid=" + APIKey;
@@ -145,7 +146,7 @@ function forecastAPIfunction() {
         displayForcast(response);
 
         // Building the URL to query the second database
-        oneCallAPIfunction(response,F,wind,humidity,APIKey);
+        oneCallAPIfunction(response, F, wind, humidity, APIKey);
 
     });
 
@@ -180,9 +181,10 @@ $(document).ready(function () {
 
 //Adding an event when the page is loaded to show the last search results
 $(window).on('load', function () {
-    $("#searchInput").val(localStorage.getItem("City")) ;
+    $("#searchInput").val(localStorage.getItem("City"));
+
     displaySearchHistory();
- 
+
     forecastAPIfunction();
 
 });
