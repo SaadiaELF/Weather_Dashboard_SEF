@@ -84,7 +84,7 @@ This file is used to create a dynamic website using functions to create a simple
 
 The API interface used for this project is the OpenWeather API : 
 
-* Call 5 day / 3 hour forecast data : "api.openweathermap.org/data/2.5/forecast?q={city name}&appid={API key}"
+* Call 5 day / 3 hour forecast data : "https://api.openweathermap.org/data/2.5/forecast?q={city name}&appid={API key}"
 * Current and forecast weather data : "https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}"
 
 -----------------------------------------------------------------------------------------------------------------------
@@ -96,8 +96,8 @@ The API interface used for this project is the OpenWeather API :
 
 ## 8. URLs
 
-* The URL of the deployed application : https://saadiaelf.github.io/Work_Day_Scheduler_SEF/
+* The URL of the deployed application : https://saadiaelf.github.io/Weather_Dashboard_SEF/
 
-* The URL of the GitHub repository: https://github.com/SaadiaELF/Work_Day_Scheduler_SEF.git
+* The URL of the GitHub repository: https://github.com/SaadiaELF/Weather_Dashboard_SEF.git
 
 -----------------------------------------------------------------------------------------------------------------------
